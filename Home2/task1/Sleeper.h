@@ -2,6 +2,7 @@
 
 #include "QThread"
 
+/// delay
 class Sleeper: public QThread
 {
     public:

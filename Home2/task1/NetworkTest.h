@@ -3,6 +3,7 @@
 #include <QtCore/QtCore>
 #include <QtTest/QtTest>
 #include "Network.h"
+#include "iostream"
 
 class NetworkTest:public QObject
 {
@@ -31,13 +32,27 @@ private slots:
         for (int i = 0; i < numberOfComputers; ++i)
             network[i] = array[i];
         obj = new Network(Computers, network);
+        Computers2[0] = new Computer(new(Linux), 1);
+        Computers2[1] = new Computer(new(MacOS), 1);
+        Computers2[2] = new Computer(new(Windows), 1);
+        Computers2[3] = new Computer(new(Linux), 1);
+        Computers2[4] = new Computer(new(Windows), 1);
+        obj2 = new Network(Computers2, network);
     }
 
     void cleanup()
     {
         for (int i = 0; i < numberOfComputers; i++)
+        {
             delete Computers[i];
+            delete Computers2[i];
+        }
         delete obj;
+    }
+
+    void TestCheck()
+    {
+        QVERIFY(!obj->check() && obj2->check());
     }
 
     void TestPrintLocalSystemStatus()
@@ -52,14 +67,18 @@ private slots:
         QVERIFY(str.str() == obj->printLocalSystemStatus());
     }
 
-    /*void TestWork()
+    void TestCheckWork()
     {
+        cout << "Need wait until work Network" << endl;
         obj->work();
-    }*/
+        QVERIFY(obj->check());
+    }
 
 private:
     Computer *Computers[numberOfComputers];
+    Computer *Computers2[numberOfComputers];
     Network *obj;
+    Network *obj2;
 };
 
 QTEST_MAIN(NetworkTest)
