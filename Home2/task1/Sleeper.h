@@ -3,11 +3,11 @@
 #include "QThread"
 
 /// delay
-class Sleeper: public QThread
+class Sleeper : public QThread
 {
-    public:
-        static void msleep(int ms)
-        {
-            QThread::msleep(ms);
-        }
+public:
+    static void msleep(int ms)
+    {
+        QThread::msleep(ms);
+    }
 };

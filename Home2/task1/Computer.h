@@ -16,29 +16,17 @@ public:
       * param o - computer operating system,
       * param status - infected or not infected computer
       */
-    Computer(OS *o, bool status): os(o), isInfected(status)
-    {
-        srand(time(NULL));
-    }
+    Computer(OS *o, bool status);
 
     /// imitation of a virus attack
-    void virusAttack()
-    {     
-        int risk = rand() % MAX_CHANCE;
-        if (risk <= os->getChance())
-            isInfected = true;
-    }
+    void virusAttack();
 
     /// method that gives the status of infection
-    bool getStatus()
-    {
-        return isInfected;
-    }
+    bool checkForInfection();
 
 private:
     /// operating system
     OS *os;
     /// infected or not infected computer
     bool isInfected;
-
 };

@@ -16,7 +16,9 @@ CONFIG   -= app_bundle
 TEMPLATE = app
 
 
-SOURCES +=
+SOURCES += \
+    Computer.cpp \
+    Network.cpp
 
 HEADERS += \
     OS.h \

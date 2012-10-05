@@ -31,13 +31,13 @@ private slots:
         int *network[numberOfComputers];
         for (int i = 0; i < numberOfComputers; ++i)
             network[i] = array[i];
-        obj = new Network(Computers, network);
+        obj = new Network(Computers, network, true);
         Computers2[0] = new Computer(new(Linux), 1);
         Computers2[1] = new Computer(new(MacOS), 1);
         Computers2[2] = new Computer(new(Windows), 1);
         Computers2[3] = new Computer(new(Linux), 1);
         Computers2[4] = new Computer(new(Windows), 1);
-        obj2 = new Network(Computers2, network);
+        obj2 = new Network(Computers2, network, true);
     }
 
     void cleanup()
@@ -50,9 +50,9 @@ private slots:
         delete obj;
     }
 
-    void TestCheck()
+    void TestCheckNetworkToBeInfected()
     {
-        QVERIFY(!obj->check() && obj2->check());
+        QVERIFY(!obj->checkNetworkToBeInfected() && obj2->checkNetworkToBeInfected());
     }
 
     void TestPrintLocalSystemStatus()
@@ -67,11 +67,41 @@ private slots:
         QVERIFY(str.str() == obj->printLocalSystemStatus());
     }
 
-    void TestCheckWork()
+    void TestOneStep()
     {
+        stringstream str;
         cout << "Need wait until work Network" << endl;
-        obj->work();
-        QVERIFY(obj->check());
+        str << "Computer #1 isn't infected\n";
+        str << "Computer #2 isn't infected\n";
+        str << "Computer #3 isn't infected\n";
+        str << "Computer #4 isn't infected\n";
+        str << "Computer #5 is infected\n";
+        str << endl;
+        QVERIFY(str.str() == obj->oneStep());
+        str.str("");
+        str << "Computer #1 isn't infected\n";
+        str << "Computer #2 isn't infected\n";
+        str << "Computer #3 is infected\n";
+        str << "Computer #4 isn't infected\n";
+        str << "Computer #5 is infected\n";
+        str << endl;
+        QVERIFY(str.str() == obj->oneStep());
+        str.str("");
+        str << "Computer #1 isn't infected\n";
+        str << "Computer #2 is infected\n";
+        str << "Computer #3 is infected\n";
+        str << "Computer #4 is infected\n";
+        str << "Computer #5 is infected\n";
+        str << endl;
+        QVERIFY(str.str() == obj->oneStep());
+        str.str("");
+        str << "Computer #1 is infected\n";
+        str << "Computer #2 is infected\n";
+        str << "Computer #3 is infected\n";
+        str << "Computer #4 is infected\n";
+        str << "Computer #5 is infected\n";
+        str << endl;
+        QVERIFY(str.str() == obj->oneStep());
     }
 
 private:
