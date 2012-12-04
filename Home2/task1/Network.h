@@ -7,6 +7,7 @@
 #include "Sleeper.h"
 #include "sstream"
 #include <string>
+#include <QList>
 
 const int numberOfComputers = 5;
 
@@ -41,4 +42,6 @@ private:
     Computer **Computers;
     /// computer connection (the adjacency matrix)
     int *net_m[numberOfComputers];
+    bool test;
+    QList<int> list;
 };

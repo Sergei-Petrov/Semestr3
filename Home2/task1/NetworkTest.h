@@ -15,17 +15,17 @@ public:
 private slots:
     void init()
     {
-        Computers[0] = new Computer(new(Linux), 0);
-        Computers[1] = new Computer(new(MacOS), 0);
-        Computers[2] = new Computer(new(Windows), 0);
-        Computers[3] = new Computer(new(Linux), 0);
+        Computers[0] = new Computer(new(Windows), 0);
+        Computers[1] = new Computer(new(MacOS), 1);
+        Computers[2] = new Computer(new(Linux), 0);
+        Computers[3] = new Computer(new(Windows), 0);
         Computers[4] = new Computer(new(Windows), 1);
         int array[numberOfComputers][numberOfComputers] =
         {
-            {0, 0, 1, 0, 0},
-            {0, 0, 1, 0, 0},
+            {0, 1, 1, 0, 0},
+            {1, 0, 1, 1, 0},
             {1, 1, 0, 1, 1},
-            {0, 0, 1, 0, 0},
+            {0, 1, 1, 0, 0},
             {0, 0, 1, 0, 0}
         };
         int *network[numberOfComputers];
@@ -48,6 +48,7 @@ private slots:
             delete Computers2[i];
         }
         delete obj;
+        delete obj2;
     }
 
     void TestCheckNetworkToBeInfected()
@@ -59,7 +60,7 @@ private slots:
     {
         stringstream str;
         str << "Computer #1 isn't infected\n";
-        str << "Computer #2 isn't infected\n";
+        str << "Computer #2 is infected\n";
         str << "Computer #3 isn't infected\n";
         str << "Computer #4 isn't infected\n";
         str << "Computer #5 is infected\n";
@@ -72,7 +73,7 @@ private slots:
         stringstream str;
         cout << "Need wait until work Network" << endl;
         str << "Computer #1 isn't infected\n";
-        str << "Computer #2 isn't infected\n";
+        str << "Computer #2 is infected\n";
         str << "Computer #3 isn't infected\n";
         str << "Computer #4 isn't infected\n";
         str << "Computer #5 is infected\n";
@@ -80,9 +81,9 @@ private slots:
         QVERIFY(str.str() == obj->oneStep());
         str.str("");
         str << "Computer #1 isn't infected\n";
-        str << "Computer #2 isn't infected\n";
-        str << "Computer #3 is infected\n";
-        str << "Computer #4 isn't infected\n";
+        str << "Computer #2 is infected\n";
+        str << "Computer #3 isn't infected\n";
+        str << "Computer #4 is infected\n";
         str << "Computer #5 is infected\n";
         str << endl;
         QVERIFY(str.str() == obj->oneStep());

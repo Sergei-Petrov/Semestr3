@@ -19,7 +19,7 @@ public:
     Computer(OS *o, bool status);
 
     /// imitation of a virus attack
-    void virusAttack();
+    void virusAttack(int test);
 
     /// method that gives the status of infection
     bool checkForInfection();
