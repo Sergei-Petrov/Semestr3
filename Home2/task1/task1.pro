@@ -28,4 +28,5 @@ HEADERS += \
     Network.h \
     NetworkTest.h \
     MacOS.h \
-    Sleeper.h
+    Sleeper.h \
+    Random.h

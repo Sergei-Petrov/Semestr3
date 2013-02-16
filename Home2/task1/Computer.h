@@ -1,7 +1,5 @@
 #pragma once
 
-#include "cstdlib"
-#include "time.h"
 #include "OS.h"
 
 const int MAX_CHANCE = 10;

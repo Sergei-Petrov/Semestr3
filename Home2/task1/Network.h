@@ -7,7 +7,7 @@
 #include "Sleeper.h"
 #include "sstream"
 #include <string>
-#include <QList>
+#include "Random.h"
 
 const int numberOfComputers = 5;
 
@@ -23,7 +23,7 @@ public:
       * param comp - array of computers in a local network consisting,
       * param net - computer connection (the adjacency matrix)
       */
-    Network(Computer **comp, int *net[], bool isTest);
+    Network(Computer **comp, int *net[], Random *r);
 
     /// method that gives network status
     string printLocalSystemStatus();
@@ -42,6 +42,6 @@ private:
     Computer **Computers;
     /// computer connection (the adjacency matrix)
     int *net_m[numberOfComputers];
-    bool test;
+    Random *random;
     QList<int> list;
 };

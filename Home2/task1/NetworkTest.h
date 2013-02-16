@@ -3,6 +3,7 @@
 #include <QtCore/QtCore>
 #include <QtTest/QtTest>
 #include "Network.h"
+#include "Random.h"
 #include "iostream"
 
 class NetworkTest:public QObject
@@ -15,6 +16,7 @@ public:
 private slots:
     void init()
     {
+        rand = new TestRandom;
         Computers[0] = new Computer(new(Windows), 0);
         Computers[1] = new Computer(new(MacOS), 1);
         Computers[2] = new Computer(new(Linux), 0);
@@ -31,13 +33,13 @@ private slots:
         int *network[numberOfComputers];
         for (int i = 0; i < numberOfComputers; ++i)
             network[i] = array[i];
-        obj = new Network(Computers, network, true);
+        obj = new Network(Computers, network, rand);
         Computers2[0] = new Computer(new(Linux), 1);
         Computers2[1] = new Computer(new(MacOS), 1);
         Computers2[2] = new Computer(new(Windows), 1);
         Computers2[3] = new Computer(new(Linux), 1);
         Computers2[4] = new Computer(new(Windows), 1);
-        obj2 = new Network(Computers2, network, true);
+        obj2 = new Network(Computers2, network, rand);
     }
 
     void cleanup()
@@ -49,6 +51,7 @@ private slots:
         }
         delete obj;
         delete obj2;
+        delete rand;
     }
 
     void TestCheckNetworkToBeInfected()
@@ -110,6 +113,7 @@ private:
     Computer *Computers2[numberOfComputers];
     Network *obj;
     Network *obj2;
+    TestRandom *rand;
 };
 
 QTEST_MAIN(NetworkTest)
